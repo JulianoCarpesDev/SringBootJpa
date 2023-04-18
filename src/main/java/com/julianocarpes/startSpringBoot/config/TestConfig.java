@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.julianocarpes.startSpringBoot.entities.Category;
 import com.julianocarpes.startSpringBoot.entities.Order;
+import com.julianocarpes.startSpringBoot.entities.OrderItem;
 import com.julianocarpes.startSpringBoot.entities.Product;
 import com.julianocarpes.startSpringBoot.entities.User;
 import com.julianocarpes.startSpringBoot.entities.enuns.OrderStatus;
 import com.julianocarpes.startSpringBoot.repositories.CategoryRepository;
+import com.julianocarpes.startSpringBoot.repositories.OrderItemRepository;
 import com.julianocarpes.startSpringBoot.repositories.OrderRepository;
 import com.julianocarpes.startSpringBoot.repositories.ProductRepository;
 import com.julianocarpes.startSpringBoot.repositories.UserRepository;
@@ -23,6 +25,10 @@ import com.julianocarpes.startSpringBoot.repositories.UserRepository;
 public class TestConfig implements CommandLineRunner {
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private OrderItemRepository orderItemRepository;
+	
 	@Autowired
 	private OrderRepository orderRepository;
 
@@ -70,8 +76,14 @@ public class TestConfig implements CommandLineRunner {
 		userRepository.saveAll(Arrays.asList(u3, u1, u2));
 
 		orderRepository.saveAll(Arrays.asList(o1, o2, o3));
-
-	
+		
+		OrderItem oi1 = new OrderItem(o1, p1, 2, p1.getPrice());
+		OrderItem oi2 = new OrderItem(o1, p3, 1, p3.getPrice());
+		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
+		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
+		
+		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+		
 	}
 
 }
