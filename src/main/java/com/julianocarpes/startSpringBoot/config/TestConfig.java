@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.julianocarpes.startSpringBoot.entities.Category;
 import com.julianocarpes.startSpringBoot.entities.Order;
 import com.julianocarpes.startSpringBoot.entities.OrderItem;
+import com.julianocarpes.startSpringBoot.entities.Payment;
 import com.julianocarpes.startSpringBoot.entities.Product;
 import com.julianocarpes.startSpringBoot.entities.User;
 import com.julianocarpes.startSpringBoot.entities.enuns.OrderStatus;
@@ -69,7 +70,7 @@ public class TestConfig implements CommandLineRunner {
 		User u2 = new User(null, "Vanessa", "vanessa@gmail.com", "984655417", "123456");
 		User u3 = new User(null, "Rafael", "rafa@gmail.com", "999815023", "123456");
 
-		Order o1 = new Order(null, Instant.parse("2023-04-20T19:53:07Z"), OrderStatus.PAYD, u1);
+		Order o1 = new Order(null, Instant.parse("2023-04-20T19:53:07Z"), OrderStatus.PAID, u1);
 		Order o2 = new Order(null, Instant.parse("2023-04-21T03:42:10Z"), OrderStatus.WAITING_PAYMENT, u2);
 		Order o3 = new Order(null, Instant.parse("2023-04-22T15:21:22Z"), OrderStatus.WAITING_PAYMENT, u1);
 
@@ -83,6 +84,13 @@ public class TestConfig implements CommandLineRunner {
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 		
 		orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+		
+		
+		Payment pay1 = new Payment(null, Instant.parse("2023-04-20T22:53:07Z"), o1);
+		
+		o1.setPayment(pay1);
+		
+		orderRepository.save(o1);
 		
 	}
 

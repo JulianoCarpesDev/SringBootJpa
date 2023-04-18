@@ -2,7 +2,7 @@ package com.julianocarpes.startSpringBoot.entities.enuns;
 
 public enum OrderStatus {
 	WAITING_PAYMENT(1),
-	PAYD(2),
+	PAID(2),
 	SHIPPED(3),
 	DELIVERED(4),
 	CANCELED(5);
